@@ -1,0 +1,40 @@
+# Virtual Environments
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Environment Variables
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Uploaded files
+uploads/
+
+# Model files (optional)
+*.h5
+*.keras
+*.pt
+*.pth
+
+# Testing
+.pytest_cache/
+
+# Coverage
+.coverage
+htmlcov/
