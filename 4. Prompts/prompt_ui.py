@@ -24,12 +24,14 @@ template = load_prompt('template.json')
 
 # fill the placeholders
 
-prompt = template.invoke({
+
+if st.button('Summarize'):
+    chain = template | model
+    result = chain.invoke({
+        {
     'paper_input': paper_input,
     'style_input': style_input,
     'length_input': length_input
-})
-
-if st.button('Summarize'):
-   result = model.invoke(prompt)
-   st.write(result.content)
+}
+    })
+    st.write(result.content)
