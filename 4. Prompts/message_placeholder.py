@@ -11,7 +11,6 @@ chat_history = []
 with open('4. Prompts\chat_history.txt') as f:
     chat_history.extend(f.readlines())
 
-
 print(chat_history)
 
 # create prompt
