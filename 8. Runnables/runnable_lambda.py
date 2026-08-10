@@ -6,7 +6,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-passthrough = RunnablePassthrough()
+def word_count(text):
+    return len(text.split())
 
 prompt = PromptTemplate(
     template = "Write a joke about {topic}",
@@ -17,16 +18,10 @@ llm = HuggingFaceEndpoint(
     repo_id= "Qwen/Qwen2.5-7B-Instruct",
     task = "text-generation"
 )
-prompt2 = PromptTemplate(
-    template = "Explain the joke {joke}",
-    input_variables=["joke"]
-)
+
 parser = StrOutputParser()
 
 model = ChatHuggingFace(llm = llm)
-
-def word_count(text):
-    return len(text.split())
 
 joke_gen = RunnableSequence(prompt,model,parser)
 
@@ -36,5 +31,8 @@ parallel_chain = RunnableParallel({
 })
 final_chain = RunnableSequence(joke_gen,parallel_chain)
 
-print(final_chain.invoke({'topic':'AI'}))
+result = final_chain.invoke({'topic':'AI'})
 
+final_result = """{} \n word count - {}""".format (result['joke'],result['word_count'])
+
+print(final_result)
